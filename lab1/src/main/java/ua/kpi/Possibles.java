@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Possibles extends Variant {
     double[] tt = new double[20];
-    // P(C)
+
 
     public double[] P_M(double[] M, double[] k, double[][] C) {
         for (int i = 0; i < C.length; i++) {
