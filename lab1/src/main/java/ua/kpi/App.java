@@ -13,10 +13,10 @@ public class App {
         //int[][] g ={{3,2},{4,5}};
         //System.out.println(b.C.length);
         double[][] c = a.P_M_CC(b.M, b.k, b.C);
-        for (int i = 0; i < c.length ; i++) {
-            System.out.println(Arrays.toString(c[i]));
+        for (double[] doubles : c) {
+            System.out.println(Arrays.toString(doubles));
         }
-
+        System.out.println("<3");
 
 
     }
