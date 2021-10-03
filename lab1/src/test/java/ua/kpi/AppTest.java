@@ -31,7 +31,7 @@ public class AppTest {
     public void prCTestPrint() {
         double[] pC = probabilitiesCount.prC(variant.M, variant.k, variant.C);
         //System.out.println((Arrays.toString(pC)));
-        System.out.println(Arrays.stream(pC).map(x -> Precision.round(x, 4)).boxed().collect(Collectors.toList()));
+        System.out.println(Arrays.stream(pC).mapToObj(x -> String.format("%,.4f", x)).collect(Collectors.toList()));
 
     }
 
@@ -40,7 +40,7 @@ public class AppTest {
         double[][] prMC = probabilitiesCount.prMC(variant.M, variant.k, variant.C);
         for (double[] pr : prMC) {
             //System.out.println((Arrays.toString(pr)));
-            System.out.println(Arrays.stream(pr).map(x -> Precision.round(x, 4)).boxed().collect(Collectors.toList()));
+            System.out.println(Arrays.stream(pr).mapToObj(x -> String.format("%,.4f", x)).collect(Collectors.toList()));
         }
     }
 
@@ -49,7 +49,7 @@ public class AppTest {
         double[][] prMCConditional = probabilitiesCount.prMCConditional(variant.M, variant.k, variant.C);
         for (double[] pr : prMCConditional) {
             //System.out.println((Arrays.toString(pr)));
-            System.out.println(Arrays.stream(pr).map(x -> Precision.round(x, 4)).boxed().collect(Collectors.toList()));
+            System.out.println(Arrays.stream(pr).mapToObj(x -> String.format("%,.4f", x)).collect(Collectors.toList()));
         }
     }
 
@@ -64,7 +64,7 @@ public class AppTest {
         double[][] delta = probabilitiesCount.stochasticFunction(probabilitiesCount.prMCConditional(variant.M, variant.k, variant.C));
         for (double[] pr : delta) {
             //System.out.println((Arrays.toString(pr)));
-            System.out.println(Arrays.stream(pr).map(x -> Precision.round(x, 4)).boxed().collect(Collectors.toList()));
+            System.out.println(Arrays.stream(pr).mapToObj(x -> String.format("%,.4f", x)).collect(Collectors.toList()));
         }
     }
 
