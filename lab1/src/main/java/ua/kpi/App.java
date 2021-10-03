@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) {
 
-        Possibles possibles = new Possibles();
-        Variant variant = new Variant();
+        ProbabilitiesCount probabilitiesCount = new ProbabilitiesCount();
+        Variant16 variant = new Variant16();
 
-        double[][] c = possibles.prMCConditional(variant.M, variant.k, variant.C);
+        double[][] c = probabilitiesCount.prMCConditional(variant.M, variant.k, variant.C);
         for (double[] doubles : c) {
             System.out.println("sum : " + Arrays.stream(doubles).sum() + ":  " + Arrays.toString(doubles));
         }
