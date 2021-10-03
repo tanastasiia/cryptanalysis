@@ -1,57 +1,40 @@
 package ua.kpi;
 
-import java.util.Arrays;
-
 public class Possibles extends Variant {
-    double[] tt = new double[20];
 
-
-    public double[] P_M(double[] M, double[] k, double[][] C) {
-        for (int i = 0; i < C.length; i++) {
-            double temp = C[0][i];
-            double result = 0;
-            for (int j = 0; j < C.length; j++) {
-                for (int l = 0; l < C.length; l++) {
-                    if (temp == C[j][l]) {
-                        result = result + (k[j] * M[l]);
-                    }
-                }
+    public double[] prC(double[] M, double[] k, int[][] C) {
+        double[] prC = new double[20];
+        for (int j = 0; j < C.length; j++) {
+            for (int l = 0; l < C.length; l++) {
+                prC[C[j][l]] = prC[C[j][l]] + k[j] * M[l];
             }
-            tt[i] = result;
         }
-        return tt;
+        return prC;
     }
 
-    double[][] ttt = new double[20][20];
     //P(C,M)
-
-    public double[][] P_M_С(double[] M, double[] k, double[][] C) {
-        for (int i = 0; i < C.length; i++) {
-            double temp = C[0][i];
-            for (int j = 0; j < C.length; j++) {
-                for (int l = 0; l < C.length; l++) {
-                    if (temp == C[j][l]) {
-                        ttt[i][j] = k[j] * M[l];
-                    }
-                }
+    public double[][] prMC(double[] M, double[] k, int[][] C) {
+        double[][] prMC = new double[20][20];
+        for (int j = 0; j < C.length; j++) { // rows - k
+            for (int l = 0; l < C.length; l++) { //columns - M
+                prMC[C[j][l]][l] = prMC[C[j][l]][l] + k[j] * M[l];
             }
         }
-        return ttt;
+        return prMC;
     }
 
-    double[][] t = new double[20][20];
-    //P(C|M)
+    //P(M|C) = P(M,C) / P(C)
+    public double[][] prMCConditional(double[] M, double[] k, int[][] C) {
+        double[][] res = new double[20][20];
+        double[] prC = prC(M, k, C);
+        double[][] prMC = prMC(M, k, C);
 
-    public double[][] P_M_CC(double[] M, double[] k, double[][] C) {
-        double[] a = P_M(M, k, C);
-        double[][] b = P_M_С(M, k, C);
-
-        for (int i = 0; i < C.length; i++) {
-            for (int j = 0; j < C.length; j++) {
-                t[i][j] = b[i][j]/a[j];
+        for (int i = 0; i < C.length; i++) { //c
+            for (int j = 0; j < C.length; j++) { //m
+                res[i][j] = prMC[i][j] / prC[i];
             }
         }
-        return t;
+        return res;
     }
 
 }
