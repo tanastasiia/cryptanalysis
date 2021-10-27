@@ -9,7 +9,7 @@ import java.util.*;
 public class Text {
     private String fileName;
     private String str;
-    private String alphabet;
+    private final String alphabet;
 
 
     // Чистим текст от мусора
@@ -25,10 +25,23 @@ public class Text {
                 .trim();
     }
 
-    public int frequency_of_letters(){
+    public int Text_length() {
         return str.length();
     }
 
+    public double[] frequency_of_letters(){
+        double[] frequency = new double[alphabet.length()];
+        for (int i = 0; i < alphabet.length() ; i++) {
+            double term = 0 ;
+            for (int j = 0; j < str.length() ; j++) {
+               if(alphabet.charAt(i) == str.charAt(j)){
+                    term++;
+               }
+            frequency[i] = term/str.length();
+            }
+        }
+        return frequency;
+    }
 
 
 
