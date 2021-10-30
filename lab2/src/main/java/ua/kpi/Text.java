@@ -54,9 +54,9 @@ public class Text {
                     term++;
                 }
             }
-            sum = sum + (term * (term - 1));
+            sum = sum + (term * (term - 1))/str.length();
         }
-        index = sum / (str.length() * (str.length() - 1));
+        index = sum / (str.length() - 1);
         return index;
     }
 
