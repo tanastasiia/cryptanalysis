@@ -60,6 +60,18 @@ public class Text {
         return index;
     }
 
+    // H = - Sum p_i * log p_i
+    public double entropy(){
+        double H = 0;
+        double[] frequency = frequencyLetters();
+        for (int i = 0; i < frequency.length; i++) {
+            H = H - frequency[i] * Math.log(frequency[i]);
+        }
+        return H;
+    }
+
+
+
 
     @Override
     public String toString() {
