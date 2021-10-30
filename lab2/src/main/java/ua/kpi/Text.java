@@ -1,14 +1,13 @@
 package ua.kpi;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
 
 public class Text {
-    private String fileName;
-    private String str;
+    private final String fileName;
+    private final String str;
     private final String alphabet;
 
 
@@ -46,7 +45,7 @@ public class Text {
 
     public double conformityIndex() {
         double sum = 0;
-        double index = 0;
+        double index;
         for (int i = 0; i < alphabet.length(); i++) {
             double term = 0;
             for (int j = 0; j < str.length(); j++) {
@@ -54,23 +53,21 @@ public class Text {
                     term++;
                 }
             }
-            sum = sum + (term * (term - 1))/str.length();
+            sum = sum + (term * (term - 1)) / str.length();
         }
         index = sum / (str.length() - 1);
         return index;
     }
 
     // H = - Sum p_i * log p_i
-    public double entropy(){
+    public double entropy() {
         double H = 0;
         double[] frequency = frequencyLetters();
-        for (int i = 0; i < frequency.length; i++) {
-            H = H - frequency[i] * Math.log(frequency[i]);
+        for (double v : frequency) {
+            H = H - v * Math.log(v);
         }
         return H;
     }
-
-
 
 
     @Override
