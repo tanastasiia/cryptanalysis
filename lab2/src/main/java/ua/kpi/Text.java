@@ -10,7 +10,6 @@ public class Text {
     private final String str;
     private final String alphabet;
 
-
     // Чистим текст от мусора
     public Text(String fileName, String alphabet) throws IOException {
         this.fileName = fileName;
@@ -27,6 +26,14 @@ public class Text {
     public int textLength() {
         return str.length();
     }
+
+    public double[][] bigram(){
+        double [][] bi = new double[alphabet.length()][alphabet.length()];
+
+
+        return bi;
+    }
+
 
     public double[] frequencyLetters() {
         double[] frequency = new double[alphabet.length()];
@@ -69,6 +76,8 @@ public class Text {
         return H;
     }
 
+
+    
 
     @Override
     public String toString() {
