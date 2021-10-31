@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Text {
     private final String fileName;
@@ -23,11 +25,11 @@ public class Text {
                 .trim();
     }
 
-    public int textLength() {
+    public int getTextLength() {
         return str.length();
     }
 
-    public double[][] frequencyBigram() {
+    public double[][] countBigramFrequency() {
         double[][] bi = new double[alphabet.length()][alphabet.length()];
         for (int i = 0; i < alphabet.length(); i++) {
             for (int j = 0; j < alphabet.length(); j++) {
@@ -44,7 +46,7 @@ public class Text {
     }
 
 
-    public double[] frequencyLetters() {
+    public double[] countLettersFrequency() {
         double[] frequency = new double[alphabet.length()];
         for (int i = 0; i < alphabet.length(); i++) {
             double term = 0;
@@ -59,7 +61,7 @@ public class Text {
     }
 
 
-    public double conformityIndex() {
+    public double countConformityIndex() {
         double sum = 0;
         double index;
         for (int i = 0; i < alphabet.length(); i++) {
@@ -76,14 +78,28 @@ public class Text {
     }
 
     // H = - Sum p_i * log p_i
-    public double entropy() {
+    public double countEntropy() {
         double H = 0;
-        double[] frequency = frequencyLetters();
+        double[] frequency = countLettersFrequency();
         for (double v : frequency) {
             H = H - v * Math.log(v);
         }
         return H;
     }
+
+    public Map<String, Integer> countNgramsFrequencies(int n, boolean cross) {
+        Map<String, Integer> ngramsFreq = new HashMap<>();
+        //Pr(ngram) = amount of ngram / amount of all ngrams = amount of ngram *(1 / amount of all ngrams) =
+        // = amount of ngram *(1 / (str.length() - n + 1))
+        int amountOfNgrams = cross ? (str.length() - n + 1) : (str.length() / n);
+        for (int i = 0; i < amountOfNgrams; i++) {
+            int idx = cross ? i : (n * i);
+            String ngram = str.substring(idx, idx + n);
+            ngramsFreq.put(ngram, ngramsFreq.getOrDefault(ngram, 0) + 1);
+        }
+        return ngramsFreq;
+    }
+
 
 
     @Override
