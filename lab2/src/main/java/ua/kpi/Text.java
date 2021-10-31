@@ -27,10 +27,19 @@ public class Text {
         return str.length();
     }
 
-    public double[][] bigram(){
-        double [][] bi = new double[alphabet.length()][alphabet.length()];
-
-
+    public double[][] frequencyBigram() {
+        double[][] bi = new double[alphabet.length()][alphabet.length()];
+        for (int i = 0; i < alphabet.length(); i++) {
+            for (int j = 0; j < alphabet.length(); j++) {
+                double term = 0;
+                for (int k = 0; k <str.length() - 1 ; k++) {
+                    if (alphabet.charAt(i) == str.charAt(k) & alphabet.charAt(j) == str.charAt(k+1)) {
+                        term++;
+                    }
+                }
+                bi[i][j] = term/str.length();
+            }
+        }
         return bi;
     }
 
@@ -76,8 +85,6 @@ public class Text {
         return H;
     }
 
-
-    
 
     @Override
     public String toString() {

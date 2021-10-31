@@ -13,7 +13,7 @@ public class App {
         System.out.println(a.textLength());
         //System.out.println(a.conformityIndex());
         //System.out.println(a.entropy());
-
+        System.out.println(Arrays.deepToString(a.frequencyBigram()));
 
     }
 }
