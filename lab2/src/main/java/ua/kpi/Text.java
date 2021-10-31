@@ -52,7 +52,7 @@ public class Text {
                 if (alphabet.charAt(i) == str.charAt(j)) {
                     term++;
                 }
-                frequency[i] = term / str.length();
+                frequency[i] = term / (str.length() - 1);
             }
         }
         return frequency;
