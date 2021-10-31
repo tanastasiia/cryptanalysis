@@ -6,7 +6,7 @@ import java.util.*;
 public class Criterion {
 
     //true - text is in language; false - text is random
-    public boolean criterion10(int L, String X, Set<String> forbiddenNgrams, int ngramSize) {
+    public boolean criterion10(int L, String X, List<String> forbiddenNgrams, int ngramSize) {
         for (int i = 0; i < L - ngramSize; i++) {
             if (forbiddenNgrams.contains(X.substring(i, i + ngramSize))) {
                 return false;
