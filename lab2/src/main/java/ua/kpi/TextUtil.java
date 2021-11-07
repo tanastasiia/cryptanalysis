@@ -84,15 +84,16 @@ public class TextUtil {
         return H;
     }
 
-    public Map<String, Integer> countNgramsFrequencies(String str, int n, boolean cross) {
-        Map<String, Integer> ngramsFreq = new HashMap<>();
+    public Map<String, Double> countNgramsFrequencies(String str, int n, boolean cross) {
+        Map<String, Double> ngramsFreq = new HashMap<>();
         //Pr(ngram) = amount of ngram / amount of all ngrams = amount of ngram *(1 / amount of all ngrams) =
         // = amount of ngram *(1 / (str.length() - n + 1))
         int amountOfNgrams = cross ? (str.length() - n + 1) : (str.length() / n);
+        double probabilityBit = 1.0 / (amountOfNgrams);
         for (int i = 0; i < amountOfNgrams; i++) {
             int idx = cross ? i : (n * i);
             String ngram = str.substring(idx, idx + n);
-            ngramsFreq.put(ngram, ngramsFreq.getOrDefault(ngram, 0) + 1);
+            ngramsFreq.put(ngram, ngramsFreq.getOrDefault(ngram, 0.0) + probabilityBit);
         }
         return ngramsFreq;
     }
