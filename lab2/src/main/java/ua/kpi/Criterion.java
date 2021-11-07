@@ -1,5 +1,6 @@
 package ua.kpi;
 
+import java.io.IOException;
 import java.util.*;
 
 //1.0-1.3 3.0 5.1
@@ -32,8 +33,19 @@ public class Criterion {
         return Aap.size() < kp;
     }
 
-    public boolean criterion12(){
-        throw  new UnsupportedOperationException();
+    public boolean criterion12() {
+        throw new UnsupportedOperationException();
+    }
+
+    // L - длина текст
+    // Х - текст
+    public boolean criterion30(int L, String X, int l, int kh) {
+        String S = X.substring(0,L);
+
+        double H1 = textUtil.countEntropy(X,l);
+        double H2 = textUtil.countEntropy(S,l);
+
+        return Math.abs(H1 - H2) > kh;
     }
 
 }
