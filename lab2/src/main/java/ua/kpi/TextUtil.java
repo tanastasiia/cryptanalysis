@@ -80,16 +80,20 @@ public class TextUtil {
         if (l == 1) {
             double[] frequency = countLettersFrequency(str);
             for (double v : frequency) {
-                H = H - v * Math.log(v);
+                if (v != 0) {
+                    H = H - v * Math.log(v);
+                }
             }
         } else if (l == 2) {
             double[][] frequency = countBigramFrequency(str);
             for (double[] doubles : frequency) {
                 for (int j = 0; j < frequency.length; j++) {
-                    H = H - doubles[j] * Math.log(doubles[j]);
+                    if (doubles[j] != 0) {
+                        H = H - doubles[j] * Math.log(doubles[j]);
+                    }
                 }
             }
-            //H = H/l;
+            H = H / l;
         }
         return H;
     }
