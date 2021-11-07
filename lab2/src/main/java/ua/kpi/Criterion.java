@@ -98,4 +98,15 @@ public class Criterion {
 
     }
 
+    // L - длина текст
+    // Х - текст
+    public boolean criterion30(int L, String X, int l, int kh) {
+        String S = X.substring(0,L);
+
+        double H1 = textUtil.countEntropy(X,l);
+        double H2 = textUtil.countEntropy(S,l);
+
+        return Math.abs(H1 - H2) > kh;
+    }
+
 }

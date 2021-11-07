@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TextUtil {
-  //  private final String fileName;
- //   private final String str;
+    //  private final String fileName;
+    //   private final String str;
     private final String alphabet;
 
     public TextUtil(String alphabet) {
@@ -18,7 +18,7 @@ public class TextUtil {
 
     // Чистим текст от мусора
     public String readAndCleanText(String fileName) throws IOException {
-        return  String.join(" ", Files.readAllLines(Paths.get(fileName + ".txt")))
+        return String.join(" ", Files.readAllLines(Paths.get(fileName + ".txt")))
                 .toLowerCase()
                 .replaceAll("ґ", "г")
                 .replaceAll("[^" + alphabet + "]", "")
@@ -31,12 +31,12 @@ public class TextUtil {
         for (int i = 0; i < alphabet.length(); i++) {
             for (int j = 0; j < alphabet.length(); j++) {
                 double term = 0;
-                for (int k = 0; k <str.length() - 1 ; k++) {
-                    if (alphabet.charAt(i) == str.charAt(k) & alphabet.charAt(j) == str.charAt(k+1)) {
+                for (int k = 0; k < str.length() - 1; k++) {
+                    if (alphabet.charAt(i) == str.charAt(k) & alphabet.charAt(j) == str.charAt(k + 1)) {
                         term++;
                     }
                 }
-                bi[i][j] = term/str.length();
+                bi[i][j] = term / str.length();
             }
         }
         return bi;
@@ -75,11 +75,25 @@ public class TextUtil {
     }
 
     // H = - Sum p_i * log p_i
-    public double countEntropy(String str) {
+    public double countEntropy(String str, int l) {
         double H = 0;
-        double[] frequency = countLettersFrequency(str);
-        for (double v : frequency) {
-            H = H - v * Math.log(v);
+        if (l == 1) {
+            double[] frequency = countLettersFrequency(str);
+            for (double v : frequency) {
+                if (v != 0) {
+                    H = H - v * Math.log(v);
+                }
+            }
+        } else if (l == 2) {
+            double[][] frequency = countBigramFrequency(str);
+            for (double[] doubles : frequency) {
+                for (int j = 0; j < frequency.length; j++) {
+                    if (doubles[j] != 0) {
+                        H = H - doubles[j] * Math.log(doubles[j]);
+                    }
+                }
+            }
+            H = H / l;
         }
         return H;
     }
