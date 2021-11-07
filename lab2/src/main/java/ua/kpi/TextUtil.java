@@ -7,17 +7,18 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Text {
-    private final String fileName;
-    private final String str;
+public class TextUtil {
+  //  private final String fileName;
+ //   private final String str;
     private final String alphabet;
 
-    // Чистим текст от мусора
-    public Text(String fileName, String alphabet) throws IOException {
-        this.fileName = fileName;
+    public TextUtil(String alphabet) {
         this.alphabet = alphabet;
-        Path path = Paths.get(fileName + ".txt");
-        str = String.join(" ", Files.readAllLines(path))
+    }
+
+    // Чистим текст от мусора
+    public String readAndCleanText(String fileName) throws IOException {
+        return  String.join(" ", Files.readAllLines(Paths.get(fileName + ".txt")))
                 .toLowerCase()
                 .replaceAll("ґ", "г")
                 .replaceAll("[^" + alphabet + "]", "")
@@ -25,11 +26,7 @@ public class Text {
                 .trim();
     }
 
-    public int getTextLength() {
-        return str.length();
-    }
-
-    public double[][] countBigramFrequency() {
+    public double[][] countBigramFrequency(String str) {
         double[][] bi = new double[alphabet.length()][alphabet.length()];
         for (int i = 0; i < alphabet.length(); i++) {
             for (int j = 0; j < alphabet.length(); j++) {
@@ -46,7 +43,7 @@ public class Text {
     }
 
 
-    public double[] countLettersFrequency() {
+    public double[] countLettersFrequency(String str) {
         double[] frequency = new double[alphabet.length()];
         for (int i = 0; i < alphabet.length(); i++) {
             double term = 0;
@@ -61,7 +58,7 @@ public class Text {
     }
 
 
-    public double countConformityIndex() {
+    public double countConformityIndex(String str) {
         double sum = 0;
         double index;
         for (int i = 0; i < alphabet.length(); i++) {
@@ -78,16 +75,16 @@ public class Text {
     }
 
     // H = - Sum p_i * log p_i
-    public double countEntropy() {
+    public double countEntropy(String str) {
         double H = 0;
-        double[] frequency = countLettersFrequency();
+        double[] frequency = countLettersFrequency(str);
         for (double v : frequency) {
             H = H - v * Math.log(v);
         }
         return H;
     }
 
-    public Map<String, Integer> countNgramsFrequencies(int n, boolean cross) {
+    public Map<String, Integer> countNgramsFrequencies(String str, int n, boolean cross) {
         Map<String, Integer> ngramsFreq = new HashMap<>();
         //Pr(ngram) = amount of ngram / amount of all ngrams = amount of ngram *(1 / amount of all ngrams) =
         // = amount of ngram *(1 / (str.length() - n + 1))
@@ -100,16 +97,6 @@ public class Text {
         return ngramsFreq;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Text{" +
-                "fileName='" + fileName + '\'' +
-                ", str='" + str + '\'' +
-                ", alphabet='" + alphabet + '\'' +
-                '}';
-    }
 }
 
 

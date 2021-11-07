@@ -5,6 +5,12 @@ import java.util.*;
 //1.0-1.3 3.0 5.1
 public class Criterion {
 
+    private TextUtil textUtil;
+
+    public Criterion(TextUtil textUtil) {
+        this.textUtil = textUtil;
+    }
+
     //true - text is in language; false - text is random
     public boolean criterion10(int L, String X, List<String> forbiddenNgrams, int ngramSize) {
         for (int i = 0; i < L - ngramSize; i++) {
@@ -24,6 +30,10 @@ public class Criterion {
             }
         }
         return Aap.size() < kp;
+    }
+
+    public boolean criterion12(){
+        throw  new UnsupportedOperationException();
     }
 
 }
