@@ -13,7 +13,7 @@ public class Lab2 {
     private static final Random random = new Random(82);
     private static final TextUtil textUtil = new TextUtil(alphabet);
     private static final TextDistortion textDistortion = new TextDistortion(alphabet);
-    private static final CriterionsImpl criterions = new CriterionsImpl(alphabet);
+    private static final CriterionsImpl criterionsImpl = new CriterionsImpl(alphabet);
     public static Map<String, Double> bigramsFreq;
     public static Map<String, Double> onegramsFreq;
     public static List<String> forbiddenBigrams;
@@ -28,13 +28,13 @@ public class Lab2 {
         CRITERION10, CRITERION11, CRITERION12, CRITERION13, CRITERION30, CRITERION51, STRUCTURE_CRITERION,
     }
 
-    public static Criterion criterion10 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion10(L, X, forbiddenNgrams, ngramSize);
-    public static Criterion criterion11 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion11(L, X, forbiddenNgrams, ngramSize, ngramSize == 2 ? 2 : 1);
-    public static Criterion criterion12 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion12(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies);
-    public static Criterion criterion13 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion13(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies);
-    public static Criterion criterion30 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion30(L, X, ngramSize, languageNgramsFrequencies, ngramSize == 2 ? 0.1 : 0.3);
-    public static Criterion criterion51 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.criterion51(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies, ngramSize == 2 ? 50 : 5, ngramSize == 2 ? 47 : 0);
-    public static Criterion criterionStructure = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterions.structureCriterion(L, X, ngramSize == 2 ? 1.22 : 1.2, ngramSize == 2 ? 0.1 : 0.1);
+    public static Criterion criterion10 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion10(L, X, forbiddenNgrams, ngramSize);
+    public static Criterion criterion11 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion11(L, X, forbiddenNgrams, ngramSize, ngramSize == 2 ? 2 : 1);
+    public static Criterion criterion12 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion12(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies);
+    public static Criterion criterion13 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion13(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies);
+    public static Criterion criterion30 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion30(L, X, ngramSize, languageNgramsFrequencies, ngramSize == 2 ? 0.1 : 0.3);
+    public static Criterion criterion51 = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.criterion51(L, X, forbiddenNgrams, ngramSize, languageNgramsFrequencies, ngramSize == 2 ? 50 : 5, ngramSize == 2 ? 47 : 0);
+    public static Criterion criterionStructure = (int L, String X, List<String> forbiddenNgrams, int ngramSize, Map<String, Double> languageNgramsFrequencies) -> criterionsImpl.structureCriterion(L, X, ngramSize == 2 ? 1.22 : 1.2, ngramSize == 2 ? 0.1 : 0.1);
 
     public static Map<Criterions, Criterion> allCriterions = Map.of(
             Criterions.CRITERION10, criterion10,
