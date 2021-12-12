@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TextUtil {
 
@@ -55,6 +53,12 @@ public class TextUtil {
     }
 
     public List<String> forbiddenNgrams(Map<String, Double> ngrams) {
+        List<String> leastCommonNgrams  = ngrams.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(Map.Entry::getKey).limit(2).collect(Collectors.toList());
+        if(leastCommonNgrams.get(0).length() == 1) {
+            System.out.println("forbidden symbols " + Arrays.toString(leastCommonNgrams.toArray()));
+            return leastCommonNgrams;
+        }
+
         List<String> forbiddenNgrams = new ArrayList<>();
         for (int i = 0; i < alphabet.length(); i++) {
             for (int j = 0; j < alphabet.length(); j++) {
