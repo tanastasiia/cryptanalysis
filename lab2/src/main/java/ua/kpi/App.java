@@ -10,6 +10,7 @@ public class App {
     public static void main(String[] args) {
 
 
+
         var lab = new Lab2();
 
         int L = 10000;
