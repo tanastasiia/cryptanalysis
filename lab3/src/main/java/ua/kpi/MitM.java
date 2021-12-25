@@ -3,6 +3,7 @@ package ua.kpi;
 import java.math.BigInteger;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class MitM {
@@ -21,14 +22,19 @@ public class MitM {
 
     public static void attack(BigInteger e, BigInteger c, BigInteger n, int l) {
 
-        var XSize = BigInteger.ONE.shiftLeft(l / 2);
+        var XSize = 1 << (l / 2);
+        System.out.println("XSize " + XSize);
 
-        var XmapBySecond = Stream.iterate(BigInteger.ONE, i -> i.add(BigInteger.ONE)).parallel()
-                .map(i -> {
-                    var second = i.modPow(e, n);
-                    return new Triple(i, second, second.modInverse(n));
+        var XmapBySecond = IntStream.range(1, XSize + 1).parallel()
+                .mapToObj(i -> {
+                    if(i % 10000 == 0) {
+                        System.out.println(i);
+                    }
+                    var ii = BigInteger.valueOf(i);
+                    var second = BigInteger.valueOf(i).modPow(e, n);
+                    return new Triple(ii, second, second.modInverse(n));
                 })
-                .takeWhile(p -> p.first.compareTo(XSize) <= 0).collect(Collectors.toMap(t-> t.second, t -> t));
+                .collect(Collectors.toMap(t -> t.second, t -> t));
 
         System.out.println("X done, size : " + XmapBySecond.size());
 
