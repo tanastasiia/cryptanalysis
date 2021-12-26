@@ -6,11 +6,6 @@ import java.util.stream.Collectors;
 
 public class Se {
 
-
-    static BigInteger x = new BigInteger("0");
-    static BigInteger y = new BigInteger("0");
-
-
     private static BigInteger root(BigInteger num, int r) {
 
         var x0 = BigInteger.ONE;
@@ -26,7 +21,6 @@ public class Se {
         return x0;
 
     }
-
 
     private static BigInteger chinese(List<BigInteger> Cs, List<BigInteger> Ns) {
         var M = Ns.stream().reduce(BigInteger::multiply).orElseThrow();

@@ -38,7 +38,7 @@ public class MitM {
                 System.out.println("T : " + T.toString(16));
                 System.out.println("M : " + S.multiply(T).toString(16));
                 System.out.println("C : " + S.multiply(T).modPow(e, n).toString(16));
-                System.out.println("euqals: " + (S.multiply(T).modPow(e, n).compareTo(c) == 0));
+                System.out.println("equals: " + (S.multiply(T).modPow(e, n).compareTo(c) == 0));
                 break;
             }
         }
